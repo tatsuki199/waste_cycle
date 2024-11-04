@@ -2,18 +2,6 @@
   <head>
     <link href="/docs/5.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
   </head>
-  <!-- Example single danger button -->
-  <%# <div class="btn-group">
-    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-      Action
-    </button>
-    <ul class="dropdown-menu">
-      <li><a class="dropdown-item" href="#">Action</a></li>
-      <li><a class="dropdown-item" href="#">Another action</a></li>
-      <li><a class="dropdown-item" href="#">Something else here</a></li>
-      <li><hr class="dropdown-divider"></li>
-      <li><a class="dropdown-item" href="#">Separated link</a></li>
-    </ul> %>
     <body> 
       <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="check2" viewBox="0 0 16 16">
@@ -79,12 +67,16 @@
     </div>
     <div class="navbar navbar-dark bg-dark shadow-sm">
       <div class="container">
-        <a href="#" class="navbar-brand d-flex align-items-center">
-          <strong>WasteCycle</strong>
-        </a>
-        <a href="#" class="btn btn-primary my-2">ログイン</a>
-            <a href="#" class="btn btn-primary my-2">新規登録</a>
-            <a href="#" class="btn btn-primary my-2">ログアウト</a>
+        <%= link_to 'WasteCycle', "#", class: "navbar-brand d-flex align-items-center" %>
+        <ul>
+          <% if user_signed_in? %>
+          <li><%= link_to "こんにちは『#{current_user.name}』さん", "#", class: "navbar-brand d-flex align-items-center" %></li>
+          <li><%= link_to 'ログアウト', destroy_user_session_path, data: {turbo_method: :delete}, class: "btn btn-primary my-2"%></li>
+          <% else %>
+           <li><%= link_to 'ログイン', "/users/sign_in", class: "btn btn-primary my-2"%></li>
+            <li><%= link_to '新規登録', "/users/sign_up",class: "btn btn-primary my-2"%></li>
+            <%end%>
+          </ul>
       </div>
     </div>
   </header>
@@ -96,11 +88,6 @@
         <div class="col-lg-6 col-md-8 mx-auto">
           <h1 class="fw-light">WasteCycle</h1>
           <p class="lead text-body-secondary">サンプルサンプル</p>
-          <p>
-            <a href="#" class="btn btn-primary my-2">ログイン</a>
-            <a href="#" class="btn btn-primary my-2">新規登録</a>
-            <a href="#" class="btn btn-primary my-2">ログアウト</a>
-          </p>
         </div>
       </div>
     </section>
